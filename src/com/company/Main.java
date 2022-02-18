@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    public static int getRandom(int intRange){
-        return  (int) (Math.random()*intRange);
-    }
+//    public static int getRandom(int intRange){
+//        return  (int) (Math.random()*intRange);
+//    }
 
-    //TODO оздат карту контактов и ракту груп
+
+
+    //TODO начал переделываеть в качестве хэк кода должен быть телефон, мы ищем контакт по номеру телефона
+    // ТО DO так же необходимо группы в класс phone Book
 
     public static void main(String[] args) {
 

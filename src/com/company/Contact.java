@@ -7,12 +7,15 @@ public class Contact {
     private String surname;
     private String patronymic;
     private Gender gender;
+    private final String phoneNumber;
 
-    public Contact(String names, String surname, String patronymic, Gender gender) {
+
+    public Contact(String names, String surname, String patronymic, Gender gender, String phoneNumber) {
         this.names = names;
         this.surname = surname;
         this.patronymic = patronymic;
         this.gender = gender;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFIO() {
@@ -24,8 +27,7 @@ public class Contact {
     public String toString() {
         return names + " "
                 + patronymic + " "
-                + surname + " "
-                + "пол: " + gender;
+                + surname + " ";
     }
 
     @Override //todo переписать метод так же как и в презентации у Юры, добавить допольнительные проверки
@@ -42,7 +44,7 @@ public class Contact {
 
     @Override
     public int hashCode(){
-        return Objects.hash(names,patronymic,surname);
+        return Objects.hash(phoneNumber);
     }
 
     public String getSurname() {

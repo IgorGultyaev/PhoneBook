@@ -227,12 +227,12 @@ public class DataGenerator {
             contact = new Contact(listFemaleNames[getRandom(listFemaleNames.length)],
                     listFemaleSurnames[getRandom(listFemaleSurnames.length)],
                     listFemalePatronymics[getRandom(listFemalePatronymics.length)],
-                    Gender.FEMALE);
+                    Gender.FEMALE, getRNDPhone(9));
         } else {
             contact = new Contact(listManNames[getRandom(listManNames.length)],
                     listManSurnames[getRandom(listManSurnames.length)],
                     listManPatronymics[getRandom(listManPatronymics.length)],
-                    Gender.MAN);
+                    Gender.MAN,getRNDPhone(9));
         }
         return contact;
     }
@@ -243,12 +243,12 @@ public class DataGenerator {
             contact = new Contact(listFemaleNames[getRandom(9)],
                     listFemaleSurnames[getRandom(9)],
                     listFemalePatronymics[getRandom(9)],
-                    Gender.FEMALE);
+                    Gender.FEMALE,getRNDPhone(9));
         } else {
             contact = new Contact(listManNames[getRandom(9)],
                     listManSurnames[getRandom(9)],
                     listManPatronymics[getRandom(9)],
-                    Gender.MAN);
+                    Gender.MAN,getRNDPhone(9));
         }
         return contact;
     }
