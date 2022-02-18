@@ -42,7 +42,10 @@ public class Contact {
 
     @Override
     public int hashCode(){
-        return Objects.hash(names,patronymic,surname,gender);
+        return Objects.hash(names,patronymic,surname);
     }
 
+    public String getSurname() {
+        return surname;
+    }
 }
