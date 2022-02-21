@@ -19,15 +19,17 @@ public class Contact {
     }
 
     public String getFIO() {
-        return names + " " + patronymic + " " + surname;
+        return surname + " " + names + " " + patronymic ;
     }
 
 
     @Override
     public String toString() {
-        return names + " "
+        return surname + " "
+                + names + " "
                 + patronymic + " "
-                + surname + " ";
+                + phoneNumber;
+
     }
 
     @Override //todo переписать метод так же как и в презентации у Юры, добавить допольнительные проверки
@@ -49,5 +51,9 @@ public class Contact {
 
     public String getSurname() {
         return surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
