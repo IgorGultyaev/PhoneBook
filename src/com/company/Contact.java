@@ -3,11 +3,11 @@ package com.company;
 import java.util.Objects;
 
 public class Contact {
+    private final String phoneNumber;
     private String names;
     private String surname;
     private String patronymic;
     private Gender gender;
-    private final String phoneNumber;
 
 
     public Contact(String names, String surname, String patronymic, Gender gender, String phoneNumber) {
@@ -19,7 +19,7 @@ public class Contact {
     }
 
     public String getFIO() {
-        return surname + " " + names + " " + patronymic ;
+        return surname + " " + names + " " + patronymic;
     }
 
 
@@ -32,12 +32,12 @@ public class Contact {
 
     }
 
-    @Override //todo переписать метод так же как и в презентации у Юры, добавить допольнительные проверки
-    public boolean equals(Object obj){
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null || obj.getClass().equals(Contact.class)){
+        if (obj == null || !obj.getClass().equals(Contact.class)) {
             return false;
         }
         Contact comparedContact = (Contact) obj;
@@ -45,7 +45,7 @@ public class Contact {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(phoneNumber);
     }
 

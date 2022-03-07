@@ -1,9 +1,10 @@
 package com.company;
+
 import java.util.*;
 
 public class Main {
 
-    public static Map<String, Contact> addContact (Map<String, Contact> contacts) {
+    public static Map<String, Contact> addContact(Map<String, Contact> contacts) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Фамилию");
         String surname = scanner.nextLine();
@@ -17,9 +18,9 @@ public class Main {
         System.out.println("Пол: М/Ж");
         String genderChoice = scanner.nextLine();
         Gender gender;
-        if (genderChoice.equals("М")){
+        if (genderChoice.equals("М")) {
             gender = Gender.MAN;
-        } else if (genderChoice.equals("Ж")){
+        } else if (genderChoice.equals("Ж")) {
             gender = Gender.FEMALE;
         } else {
             System.out.println("Ок Пусть будет девочка");
@@ -29,18 +30,18 @@ public class Main {
         System.out.println("Телефон");
         String phoneNumber = scanner.nextLine();
 
-        Contact contact = new Contact(name,surname,patronymic,gender, phoneNumber);
+        Contact contact = new Contact(name, surname, patronymic, gender, phoneNumber);
 
         System.out.println("Добавить новый контакт в группу по первым символам фамилии? введите да или нет");
         String сhoice = scanner.nextLine();
 
-        if (сhoice.equals("да")){
+        if (сhoice.equals("да")) {
             DataGenerator.formationGroupsByFirstSymbols(3, contact);
             System.out.println("Контакт добвлен в группу по первым символам фамилии");
-        } else if (genderChoice.equals("нет")){
+        } else if (genderChoice.equals("нет")) {
             System.out.println("Контакт не добавлен не в одну группу");
         }
-        contacts.put(phoneNumber,contact);
+        contacts.put(phoneNumber, contact);
         return contacts;
 
     }
@@ -55,7 +56,7 @@ public class Main {
 
     }
 
-    public static void printContactsGroups(Map<String, ArrayList<Contact>> contacts){
+    public static void printContactsGroups(Map<String, ArrayList<Contact>> contacts) {
         System.out.println("Вывести на печать " + contacts.size() + " Записей? Введите да/нет");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
@@ -66,12 +67,11 @@ public class Main {
 // TODO
 
 
-
     public static void main(String[] args) {
         Map<String, Contact> contacts = new HashMap<>();
 
         Scanner scanner = new Scanner(System.in);
-         int choiceInt = -1;
+        int choiceInt = -1;
         do {
             System.out.println("Выберите действие:");
             System.out.println("1. Создать список контактов");
@@ -112,11 +112,11 @@ public class Main {
                     if (contacts.containsKey(numberPhone)) {
                         long start = (new Date()).getTime();
                         System.out.println(contacts.get(numberPhone));
-                        System.out.println("Найден за " + (((new Date()).getTime())-start) + " миллисекунд");
+                        System.out.println("Найден за " + (((new Date()).getTime()) - start) + " миллисекунд");
                     } else {
                         System.out.println("Такого контакта не существует");
                     }
-;
+                    ;
                     break;
                 case (6):
                     System.out.println("Введите имя группы контактов");

@@ -279,13 +279,13 @@ public class DataGenerator {
                 formationGroupsByFirstSymbols(1, contact);
                 formationGroupsByFirstSymbols(2, contact);
                 formationGroupsByFirstSymbols(3, contact);
-                contacts.put(phone,contact);
+                contacts.put(phone, contact);
                 recordsCreated++;
             }
 
         }
         System.out.println("создано: " + recordsCreated + " записей");
-        System.out.println("за " + (((new Date()).getTime())-start) + " миллисекунд");
+        System.out.println("за " + (((new Date()).getTime()) - start) + " миллисекунд");
         return contacts;
     }
 }
