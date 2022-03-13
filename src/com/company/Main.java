@@ -3,9 +3,9 @@ package com.company;
 import java.util.*;
 
 public class Main {
+    public static Scanner scanner = new Scanner(System.in);
 
     public static Map<String, Contact> addContact(Map<String, Contact> contacts) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Фамилию");
         String surname = scanner.nextLine();
 
@@ -23,18 +23,14 @@ public class Main {
         } else if (genderChoice.equals("Ж")) {
             gender = Gender.FEMALE;
         } else {
-            System.out.println("Ок Пусть будет девочка");
+            System.out.println("Ок Пусть будет Ж");
             gender = Gender.FEMALE;
         }
-
         System.out.println("Телефон");
         String phoneNumber = scanner.nextLine();
-
         Contact contact = new Contact(name, surname, patronymic, gender, phoneNumber);
-
         System.out.println("Добавить новый контакт в группу по первым символам фамилии? введите да или нет");
         String сhoice = scanner.nextLine();
-
         if (сhoice.equals("да")) {
             DataGenerator.formationGroupsByFirstSymbols(3, contact);
             System.out.println("Контакт добвлен в группу по первым символам фамилии");
@@ -48,29 +44,22 @@ public class Main {
 
     public static void printContacts(Map<String, Contact> contacts) {
         System.out.println("Вывести на печать " + contacts.size() + " Записей? Введите да/нет");
-        Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         if (choice.equals("да")) {
             contacts.forEach((key, value) -> System.out.println(key + " : " + value));
         }
-
     }
 
     public static void printContactsGroups(Map<String, ArrayList<Contact>> contacts) {
         System.out.println("Вывести на печать " + contacts.size() + " Записей? Введите да/нет");
-        Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         if (choice.equals("да")) {
             contacts.forEach((key, value) -> System.out.println(key + " : " + value));
         }
     }
-// TODO
-
 
     public static void main(String[] args) {
         Map<String, Contact> contacts = new HashMap<>();
-
-        Scanner scanner = new Scanner(System.in);
         int choiceInt = -1;
         do {
             System.out.println("Выберите действие:");
@@ -135,4 +124,3 @@ public class Main {
         scanner.close();
     }
 }
-//TODO при большом наборе данныз может быть совпадение дописать условие, которе исключает дублирование фимилий и номера телефона
