@@ -98,9 +98,7 @@ public class Main {
                     String nameGroup = scanner.nextLine();
                     System.out.println();
                     if (contactGroup.containsKey(nameGroup)) {
-                        long start = (new Date()).getTime();
-                        contactGroup.get(nameGroup).printContacts();
-                        System.out.println("Найден за " + (((new Date()).getTime()) - start) + " миллисекунд");
+                        System.out.println(contactGroup.get(nameGroup).printContacts());
                     } else {
                         System.out.println("Такого контакта не существует");
                     }
