@@ -2,8 +2,6 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DataGenerator {
     public static String[] listManNames = {"Август", "Агап", "Агафон", "Адам", "Адриан", "Азарий", "Аким", "Алан",
@@ -257,36 +255,37 @@ public class DataGenerator {
         return contact;
     }
 
-    public static Map<String, PhoneBook> formationGroupsByFirstSymbols(int numberOfSymbols, Contact contact, Map<String, PhoneBook> contactGroup) {
+    public static PhoneBook formationGroupsByFirstSymbols(int numberOfSymbols, Contact contact, PhoneBook phoneBook) {
 
         while (numberOfSymbols > 0) {
             String nameGroup = contact.getSurname().substring(0, numberOfSymbols);
 
-            if (contactGroup.containsKey(nameGroup)) {
-                contactGroup.get(nameGroup).addContactInGroup(contact);
+            if (phoneBook.getPhoneBook().containsKey(nameGroup)) {
+                phoneBook.getPhoneBook().get(nameGroup).add(contact);
             } else {
                 ArrayList<Contact> contacts = new ArrayList<>();
                 contacts.add(contact);
-                contactGroup.put(nameGroup, new PhoneBook(nameGroup, contacts));
+                phoneBook.getPhoneBook().put(nameGroup, contacts);
             }
             numberOfSymbols--;
         }
-        return contactGroup;
+        return phoneBook;
     }
 
-    public static Map<String, PhoneBook> formationContacts(int number, Map<String, PhoneBook> contacts) {
-        Map<String, PhoneBook> contactGroup = new HashMap<>();
-        int recordsCreated = 0;
+    public static PhoneBook formationContacts(int number, PhoneBook phoneBook) {
+//        PhoneBook phoneBook = new PhoneBook(null,null);
         long start = (new Date()).getTime();
         for (int createMap = 0; createMap < number; createMap++) {
             Contact contact = generatingContact();
             String phone = contact.getPhoneNumber();
-            contactGroup = DataGenerator.formationGroupsByFirstSymbols(3, contact, contacts);
-
+            phoneBook = DataGenerator.formationGroupsByFirstSymbols(3, contact, phoneBook);
         }
-        System.out.println("создано: " + recordsCreated + " записей");
+        System.out.println("создано: " + phoneBook.getPhoneBook().size() + " записей");
         System.out.println("за " + (((new Date()).getTime()) - start) + " миллисекунд");
-        return contactGroup;
+        if (phoneBook.getPhoneBook().containsKey(null)) {
+            phoneBook.getPhoneBook().remove(null);
+        }
+        return phoneBook;
     }
 }
 

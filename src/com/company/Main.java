@@ -1,16 +1,15 @@
 package com.company;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
+    public static PhoneBook phoneBook;
 
-    public static Map<String, PhoneBook> addContact(Map<String, PhoneBook> contactGroup) {
+    public static PhoneBook addContact(PhoneBook phoneBook) {
         System.out.println("Фамилию");
         String surname = scanner.nextLine();
+        String nameGroup;
 
         System.out.println("Имя");
         String name = scanner.nextLine();
@@ -32,47 +31,26 @@ public class Main {
         System.out.println("Телефон");
         String phoneNumber = scanner.nextLine();
         Contact contact = new Contact(name, surname, patronymic, gender, phoneNumber);
-        System.out.println("Добавить новый контакт в группу по первым символам фамилии? введите да или нет");
-        String сhoice = scanner.nextLine();
-        if (сhoice.equals("да")) {
-            DataGenerator.formationGroupsByFirstSymbols(3, contact, contactGroup);
-            System.out.println("Контакт добвлен в группу по первым символам фамилии");
-        } else if (genderChoice.equals("нет")) {
-            System.out.println("Контакт не добавлен не в одну группу");
+
+        System.out.println("Введите имя группы");
+        nameGroup = scanner.nextLine();
+        phoneBook.addContactInGroup(nameGroup, contact);
+        if (phoneBook.getPhoneBook().containsKey(null)) {
+            phoneBook.getPhoneBook().remove(null);
         }
-
-        return DataGenerator.formationGroupsByFirstSymbols(1, contact, contactGroup);
-
+        return phoneBook;
     }
-// TODO проравботать работу с generic или стрим и объеденить две процедуры в одну
-//    public static void printContacts(Map<String, Contact> contact) {
-//        System.out.println("Вывести на печать " + contact.size() + " Записей? Введите да/нет");
-//        String choice = scanner.nextLine();
-//        if (choice.equals("да")) {
-//            contact.forEach((key, value) -> System.out.println(key + " : " + value));
-//        }
-//    }
 
-    public static void printContactsGroups(Map<String, PhoneBook> contactGroup) {
-        System.out.println("Вывести на печать " + contactGroup.size() + " Записей? Введите да/нет");
-        String choice = scanner.nextLine();
-        if (choice.equals("да")) {
-            contactGroup.forEach((key, value) -> System.out.println(key + " : " + value.printContacts()));
-        }
-    }
 
     public static void main(String[] args) {
-
-        Map<String, PhoneBook> contactGroup = new HashMap<>();
+        PhoneBook phoneBook = new PhoneBook(null, null);
         int choiceInt = -1;
         do {
             System.out.println("Выберите действие:");
-            System.out.println("1. Создать список контактов");
+            System.out.println("1. Создать список контактов автоматически");
             System.out.println("2. Создать контакт");
             System.out.println("3. Распечатать все контакты");
             System.out.println("4. Распечатать группу контактов");
-//            System.out.println("5. Распечатать группы");
-
             System.out.println("0. Выход");
 
             String choice = scanner.nextLine();
@@ -84,21 +62,25 @@ public class Main {
                     System.out.println("Введите количество контактов, которые необходимо создать");
                     String numberRecords = scanner.nextLine();
                     int intNumberRecords = Integer.parseInt(numberRecords);
-                    contactGroup = DataGenerator.formationContacts(intNumberRecords, contactGroup);
+
+                    phoneBook = DataGenerator.formationContacts(intNumberRecords, phoneBook);
                     break;
                 case (2):
-                    addContact(contactGroup);
+                    addContact(phoneBook);
                     break;
 
                 case (3):
-                    printContactsGroups(contactGroup);
+                    phoneBook.printContactsGroups();
                     break;
                 case (4):
                     System.out.println("Введите имя группы: ");
                     String nameGroup = scanner.nextLine();
+                    if (nameGroup == null) {
+                        nameGroup = " ";
+                    }
                     System.out.println();
-                    if (contactGroup.containsKey(nameGroup)) {
-                        System.out.println(contactGroup.get(nameGroup).printContacts());
+                    if (phoneBook.getPhoneBook().containsKey(nameGroup)) {
+                        phoneBook.printContactsInGroups(nameGroup);
                     } else {
                         System.out.println("Такого контакта не существует");
                     }

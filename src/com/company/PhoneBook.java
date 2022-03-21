@@ -1,38 +1,49 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PhoneBook {
-    private ArrayList<Contact> contacts;
-    private String nameGroup;
+
+    private Map<String, ArrayList<Contact>> phoneBook;
 
     public PhoneBook(String nameGroup, ArrayList<Contact> contacts) {
-        this.contacts = contacts;
-        this.nameGroup = nameGroup;
+        phoneBook = new HashMap<>();
+        phoneBook.put(nameGroup, contacts);
     }
 
-    public void addContactInGroup(Contact contact) {
-        contacts.add(contact);
+    public PhoneBook(Map<String, ArrayList<Contact>> phoneBook) {
+        this.phoneBook = phoneBook;
     }
 
-    public String printContacts() {
-        return contacts.toString();
+    public void printContactsGroups() {
+        this.phoneBook.forEach((key, value) -> System.out.println(key + " : " + value));
+    }
+
+    public void printContactsInGroups(String nameGroups) {
+        this.phoneBook.get(nameGroups).toString();
+
+    }
+
+    public Map<String, ArrayList<Contact>> getPhoneBook() {
+        return phoneBook;
+    }
+
+    public void addContactInGroup(String nameGroup, Contact contact) {
+        if (phoneBook.containsKey(nameGroup)) {
+            phoneBook.get(nameGroup).add(contact);
+        } else {
+            ArrayList<Contact> contacts = new ArrayList<>();
+            contacts.add(contact);
+            phoneBook.put(nameGroup, contacts);
+        }
     }
 
     @Override
     public String toString() {
-        return nameGroup;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nameGroup);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj.toString().equals(nameGroup);
+        return phoneBook.toString();
     }
 
 }
